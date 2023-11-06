@@ -25,3 +25,16 @@ Launch the server with `python src/main.py`.
 If needed, you can install the dependencies with `pip install -r requirements.txt`.
 
 The server is available at `http://localhost:5001`.
+
+
+## Build localy in production
+
+### Build docker image
+```bash
+docker build -f build/Dockerfile -t monitoring-pm-backend $(for i in `cat .env`; do out+="--build-arg $i " ; done; echo $out;out="") .
+```
+
+### Run docker container
+```bash
+docker run -d -p 5001:5001 monitoring-pm-backend
+```
